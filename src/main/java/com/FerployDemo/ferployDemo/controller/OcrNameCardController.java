@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,15 +20,8 @@ public class OcrNameCardController {
     }
 
     @PostMapping("api/namecard")
-    public Map<String, Object> processNameCard(@RequestBody NameCardRequest request) {
+    public Map<String, Object> processNameCard(@RequestBody List<Map<String, String>> ocrNameCardList) {
         // 이미지의 base64 인코딩 데이터와 포맷을 서비스에 전달
-        return ocrNameCardService.ocrNameCard(request.getImgFormat(), request.getBase64Img());
-    }
-
-    // 요청에서 사용할 데이터 클래스를 정의
-    @Data
-    public static class NameCardRequest {
-        private String base64Img;
-        private String imgFormat;
+        return ocrNameCardService.ocrNameCard(ocrNameCardList);
     }
 }

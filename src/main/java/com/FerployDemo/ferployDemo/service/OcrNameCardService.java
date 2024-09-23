@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OcrNameCardService {
@@ -24,8 +22,31 @@ public class OcrNameCardService {
     public OcrNameCardService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
+    public Map<String, Object> ocrNameCard(List<Map<String, String>> ocrNameCardList) {
+        // 결과를 담을 리스트 생성
+        List<Map<String, Object>> resultList = new ArrayList<>();
 
-    public Map<String, Object> ocrNameCard(String format, String base64Image) {
+        // 각각의 이미지에 대해 OCR API 호출
+        for (Map<String, String> ocrNameCard : ocrNameCardList) {
+            try {
+                // 각 이미지에 대해 OCR 처리
+                Map<String, Object> ocrResult = getOneNameCardOcr(ocrNameCard);
+
+                // OCR 처리 결과가 있으면 리스트에 추가
+                resultList.add(ocrResult != null ? ocrResult : new HashMap<>());
+            } catch (Exception e) {
+                // 예외 발생 시 빈 객체 추가
+                resultList.add(new HashMap<>());
+            }
+        }
+
+        // 최종 결과를 맵에 담아 반환
+        Map<String, Object> response = new HashMap<>();
+        response.put("results", resultList);
+        return response;
+    }
+
+    public Map<String, Object> getOneNameCardOcr(Map<String, String> ocrNameCard) {
         String requestId = UUID.randomUUID().toString();
         long timestamp = System.currentTimeMillis();
 
@@ -36,12 +57,14 @@ public class OcrNameCardService {
         requestBody.put("timestamp", timestamp);
 
         // 이미지 데이터 설정
-        Map<String, String> image = new HashMap<>();
-        image.put("format", format);
-        image.put("data", base64Image);
-        image.put("name", "namecard-demo");
+        List<Map<String, String>> imageList = new ArrayList<>();
+        Map<String, String> imageData = new HashMap<>();
+        imageData.put("format", ocrNameCard.get("format"));
+        imageData.put("data", ocrNameCard.get("base64Img"));
+        imageData.put("name", "namecard-demo");
+        imageList.add(imageData);
 
-        requestBody.put("images", new Object[]{image});
+        requestBody.put("images", imageList);
 
         // HTTP 요청 헤더 설정
         HttpHeaders headers = new HttpHeaders();
@@ -51,21 +74,11 @@ public class OcrNameCardService {
         // HTTP 요청 생성
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
-        // 클로버 OCR API 호출
         try {
-            // postForObject를 사용하여 POST 요청 보내기
-            Map<String, Object> response = restTemplate.postForObject(
-                    CLOVER_OCR_URL, entity, Map.class);
-
-            // 응답 처리
-            if (response != null) {
-                return response;
-            } else {
-                throw new RuntimeException("OCR API 호출 실패: 응답이 null");
-            }
+            // 클로버 OCR API 호출
+            return restTemplate.postForObject(CLOVER_OCR_URL, entity, Map.class);
         } catch (Exception e) {
             throw new RuntimeException("OCR 처리 중 오류 발생", e);
         }
     }
-
 }
