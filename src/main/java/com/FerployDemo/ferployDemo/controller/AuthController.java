@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @RestController
-public class auth {
+public class AuthController {
 
     @Value("${google.client.id}")
     private String clientId;
