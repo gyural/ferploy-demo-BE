@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
 @RestController
-public class auth {
+public class AuthController {
 
     @Value("${google.client.id}")
     private String clientId;
@@ -31,8 +33,8 @@ public class auth {
         String tokenUrl = "https://oauth2.googleapis.com/token";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        String tokenRequestBody = "code=" + code +
+        String decode = URLDecoder.decode(code, StandardCharsets.UTF_8);
+        String tokenRequestBody = "code=" + decode +
                 "&client_id=" + clientId +
                 "&client_secret=" + clientSecret +
                 "&redirect_uri=" + redirectUri +
