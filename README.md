@@ -35,3 +35,19 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+DB docker-compose
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgre
