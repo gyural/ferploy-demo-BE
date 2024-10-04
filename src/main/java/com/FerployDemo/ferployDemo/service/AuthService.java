@@ -9,14 +9,16 @@ import java.util.Map;
 @Service
 public class AuthService {
 
-    @Autowired
-    private GoogleOAuthService googleOAuthService;
+    private final GoogleOAuthService googleOAuthService;
+    private final MemberService memberService;
+    private final TokenService tokenService;
 
-    @Autowired
-    private MemberService memberService;
+    public AuthService(GoogleOAuthService googleOAuthService, MemberService memberService, TokenService tokenService) {
+        this.googleOAuthService = googleOAuthService;
+        this.memberService = memberService;
+        this.tokenService = tokenService;
+    }
 
-    @Autowired
-    private TokenService tokenService;
 
     public Map<String, Object> handleGoogleOAuth(String code, String clientId, String clientSecret, String redirectUri) {
         // 1. Google OAuth에서 토큰과 사용자 정보 가져오기

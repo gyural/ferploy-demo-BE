@@ -26,6 +26,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	// Mockito
+	testImplementation 'org.mockito:mockito-core'
 }
 
 tasks.named('test') {
