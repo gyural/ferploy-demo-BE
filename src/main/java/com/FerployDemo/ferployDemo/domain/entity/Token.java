@@ -15,7 +15,7 @@ public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 기본키
-    private String jwt; // JWT 토큰
+    private String accToken; // JWT 토큰
     private String refreshToken; // 리프레시 토큰 (필요한 경우)
 
     @OneToOne // 회원과 관계를 설정
