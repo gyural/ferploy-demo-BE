@@ -1,6 +1,5 @@
 package com.FerployDemo.ferployDemo.controller;
 
-
 import com.FerployDemo.ferployDemo.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-
-import java.net.URLDecoder;
 import java.util.Map;
 
 @RestController
@@ -26,8 +22,12 @@ public class AuthController {
     @Value("${google.redirect.uri}")
     private String redirectUri;
 
-    @Autowired
-    AuthService authService;
+    private AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
 
     @GetMapping("/login/oauth/google")
     public ResponseEntity<?> googleLogin(@RequestParam String code) {
