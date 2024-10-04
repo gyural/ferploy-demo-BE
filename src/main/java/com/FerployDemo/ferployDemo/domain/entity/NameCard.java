@@ -17,6 +17,7 @@ public class NameCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //저장한 회원
     @ManyToOne
     private Member member;
 
