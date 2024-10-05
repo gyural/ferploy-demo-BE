@@ -35,6 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-config/
+/src/main/resources/config/application.properties
 docker-compose.yml
 postgres-data/
