@@ -25,6 +25,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+build.gradle
 
 ### NetBeans ###
 /nbproject/private/
@@ -35,6 +36,4 @@ out/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/config/application.properties
-docker-compose.yml
-postgres-data/
+config/
