@@ -37,6 +37,18 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
+    @GetMapping("/login/token")
+    public ResponseEntity<?> tokenLogin(@RequestHeader("Authorization") String authorizationHeader) {
+        try {
+            // Authorization 헤더에서 토큰 추출
+            String accessToken = authorizationHeader.replace("Bearer ", "");
+            return ResponseEntity.ok().body(authService.handleTokenLogin(accessToken));
+        }catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error: " + e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
 
     // Refresh Token을 통한 Access Token 재발급 엔드포인트
     @PostMapping("/refresh")
