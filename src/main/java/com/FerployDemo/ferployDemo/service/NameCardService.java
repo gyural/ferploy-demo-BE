@@ -1,20 +1,26 @@
 package com.FerployDemo.ferployDemo.service;
 
+import com.FerployDemo.ferployDemo.config.JwtTokenProvider;
 import com.FerployDemo.ferployDemo.domain.entity.NameCard;
+import com.FerployDemo.ferployDemo.dto.NameCardDTO;
 import com.FerployDemo.ferployDemo.repository.NameCardRepository;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class NameCardService {
-    private NameCardRepository nameCardRepository;
-
-    public NameCardService(NameCardRepository nameCardRepository) {
-        this.nameCardRepository = nameCardRepository;
-    }
+    private final NameCardRepository nameCardRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public NameCard createNameCard(NameCard nameCard) {
         NameCard savedNameCard = nameCardRepository.save(nameCard);
@@ -50,6 +56,25 @@ public class NameCardService {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public List<NameCardDTO> findAllNameCard(String accToken) throws IllegalAccessException {
+        if (jwtTokenProvider.validateToken(accToken)) {
+            Map<String, Object> userInfo = jwtTokenProvider.getUserFromToken(accToken);
+            String memberId = (String) userInfo.get("id");
+
+            List<NameCard> nameCards = nameCardRepository.findNameCardsByMember_Id(memberId);
+
+            return nameCards.stream()
+                    .map(nameCard -> {
+                        NameCardDTO dto = new NameCardDTO();
+                        // member 필드를 제외한 나머지 필드만 복사
+                        BeanUtils.copyProperties(nameCard, dto, "member");
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+        } else {
+            throw new IllegalAccessException("Invalid Access Token");
         }
     }
 }
