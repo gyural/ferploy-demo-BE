@@ -26,7 +26,6 @@ public class AuthController {
     private String redirectUri;
 
     private final AuthService authService;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/login/oauth/google")
     public ResponseEntity<?> googleLogin(@RequestParam String code) {

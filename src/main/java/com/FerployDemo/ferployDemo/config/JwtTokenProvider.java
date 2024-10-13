@@ -43,9 +43,14 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    // 토큰에서 사용자 이름 추출
-    public String getUserFromToken(String token) {
-        return getClaims(token).getSubject();  // subject는 username
+    public Map<String, Object> getUserFromToken(String token) {
+        Claims claims = getClaims(token);
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("id", claims.get("id"));
+        userInfo.put("nickname", claims.get("nickname"));
+        userInfo.put("role", claims.get("role"));
+
+        return userInfo;
     }
 
 
