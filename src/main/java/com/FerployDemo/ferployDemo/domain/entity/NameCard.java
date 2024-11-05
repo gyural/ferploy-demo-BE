@@ -1,11 +1,13 @@
 package com.FerployDemo.ferployDemo.domain.entity;
 
 import com.FerployDemo.ferployDemo.domain.enums.ClientType;
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
