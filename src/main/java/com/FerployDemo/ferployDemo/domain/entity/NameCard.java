@@ -1,7 +1,6 @@
 package com.FerployDemo.ferployDemo.domain.entity;
 
 import com.FerployDemo.ferployDemo.domain.enums.ClientType;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
@@ -42,11 +42,11 @@ public class NameCard {
     private String greetingMessage;
     private String savedDate;
     private boolean isMe;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "namecard_category",
-            joinColumns = @JoinColumn(name = "namecard_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private Set<Category> categories = new HashSet<>();
+    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    //@JoinTable(
+    //        name = "namecard_category",
+    //        joinColumns = @JoinColumn(name = "namecard_id"),
+    //        inverseJoinColumns = @JoinColumn(name = "category_id")
+    //)
+    //private Set<Category> categories = new HashSet<>();
 }

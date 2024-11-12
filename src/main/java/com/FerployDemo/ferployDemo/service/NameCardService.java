@@ -8,11 +8,11 @@ import com.FerployDemo.ferployDemo.domain.response.GetNameCardListResponse;
 import com.FerployDemo.ferployDemo.dto.NameCardDTO;
 import com.FerployDemo.ferployDemo.repository.MemberRepository;
 import com.FerployDemo.ferployDemo.repository.NameCardRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;

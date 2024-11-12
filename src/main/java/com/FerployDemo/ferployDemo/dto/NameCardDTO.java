@@ -15,7 +15,7 @@ public class NameCardDTO {
     private String mobileNumber;
     private String email;
     private String contactNumber;
-    private ClientType clientType;
+    private ClientType clientType; // enum으로 수정된 고객 타입
     private String place;
     private String memo;
     private String address;

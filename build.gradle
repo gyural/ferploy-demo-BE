@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.3.3'
+	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -28,8 +28,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	// Mockito
 	testImplementation 'org.mockito:mockito-core'
-	//스웨거 의존성
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+	// Swagger dependency
+//	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	//token
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
