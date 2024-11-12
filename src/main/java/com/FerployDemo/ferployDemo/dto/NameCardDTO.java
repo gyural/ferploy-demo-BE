@@ -21,4 +21,8 @@ public class NameCardDTO {
     private String address;
     private String homepage;
     private String nameCardImg;
+    private String profileImg;
+    private String bgColor;
+    private String textColor;
+    private String greetingMessage;
 }

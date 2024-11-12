@@ -1,6 +1,11 @@
 package com.FerployDemo.ferployDemo.service;
 
 import com.FerployDemo.ferployDemo.domain.entity.Category;
+import com.FerployDemo.ferployDemo.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import com.FerployDemo.ferployDemo.domain.entity.Member;
 import com.FerployDemo.ferployDemo.domain.entity.NameCard;
 import com.FerployDemo.ferployDemo.domain.entity.NameCardCategory;
@@ -17,6 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+
 @Transactional(readOnly = true)
 public class CategoryService {
     private final CategoryRepository categoryRepository;

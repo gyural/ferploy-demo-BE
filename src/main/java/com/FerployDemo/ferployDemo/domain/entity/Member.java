@@ -1,7 +1,6 @@
 package com.FerployDemo.ferployDemo.domain.entity;
 
 import com.FerployDemo.ferployDemo.common.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
