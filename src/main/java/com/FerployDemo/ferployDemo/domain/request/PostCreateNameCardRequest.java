@@ -1,5 +1,6 @@
 package com.FerployDemo.ferployDemo.domain.request;
 
+import com.FerployDemo.ferployDemo.domain.enums.ClientType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +17,5 @@ public class PostCreateNameCardRequest {
     private String place;
     private String memo;
     private String mobileNumber;
+    private ClientType clientType;  // ClientType 필드 추가
 }
