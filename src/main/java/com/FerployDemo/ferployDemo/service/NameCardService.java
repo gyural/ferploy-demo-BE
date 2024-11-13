@@ -28,7 +28,6 @@ public class NameCardService {
 
     public NameCardDTO createNameCard(PostCreateNameCardRequest nameCardRequest, String memberId) {
         Member targetMember = getMemberById(memberId);
-        System.out.println(nameCardRequest.getClientType());
         NameCard targetNameCard = mapToNameCard(nameCardRequest, targetMember);
 
         NameCard savedNameCard = nameCardRepository.save(targetNameCard);

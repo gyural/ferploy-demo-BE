@@ -18,4 +18,6 @@ public class PostCreateNameCardRequest {
     private String memo;
     private String mobileNumber;
     private ClientType clientType;  // ClientType 필드 추가
+    private String bgColor;
+    private String textColor;
 }

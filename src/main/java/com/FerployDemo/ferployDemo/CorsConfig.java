@@ -9,7 +9,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000") // 허용할 출처
+                .allowedOrigins("http://localhost:3000", "https://ferploy-demo-fe.vercel.app") // 허용할 출처
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 허용할 메소드
                 .allowedHeaders("*") // 허용할 헤더
                 .allowCredentials(true); // 쿠키를 포함한 요청을 허용할지 여부

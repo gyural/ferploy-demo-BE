@@ -8,7 +8,7 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 4
-    url: jdbc:postgresql://localhost:5432/ferploy
-    username: postgres
-    password: postgres
+    url: ${db-url:jdbc:postgresql://localhost:5432/ferploy}
+    username: ${db-username:postgres}
+    password: ${db-password:postgres}
     driver-class-name: org.postgresql.Driver
